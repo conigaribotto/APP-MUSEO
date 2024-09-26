@@ -131,7 +131,10 @@ button:hover {
     white-space: nowrap;
     pointer-events: none; 
     display: none; 
-    transform: translate(-50%, -100%); /* Centrar horizontalmente y mover hacia arriba */
+    left: 50%; /* Posición horizontal al 50% del contenedor */
+    top: 50%;  /* Posición vertical al 50% del contenedor */
+    transform: translate(-50%, -50%); /* Centramos completamente el tooltip */
+    transition: opacity 0.2s ease; /* Transición suave */
 }
 
 .paginacion {

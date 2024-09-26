@@ -28,10 +28,30 @@ function fetchDepartamentos() {
         });
 }
 
+// Función para mostrar el tooltip
+function showTooltip(event, fecha) {
+    const tooltip = document.getElementById("tooltip");
+    tooltip.innerHTML = `Fecha de creación: ${fecha}`; // Mostrar la fecha en el tooltip
+    tooltip.style.display = "block"; // Hacer visible el tooltip
+
+    // Ajustar el tooltip basado en la posición del mouse y centrado
+    const tooltipWidth = tooltip.offsetWidth; // Obtener el ancho del tooltip
+    const offsetX = event.pageX - (tooltipWidth / 2); // Centrar horizontalmente
+    const offsetY = event.pageY - 20; // Establecer la posición vertical un poco arriba del mouse
+
+    tooltip.style.left = `${offsetX}px`; // Establecer la posición horizontal
+    tooltip.style.top = `${offsetY}px`; // Establecer la posición vertical
+}
+
+// Función para ocultar el tooltip
+function hideTooltip() {
+    const tooltip = document.getElementById("tooltip");
+    tooltip.style.display = "none"; 
+}
+
 function fetchObjetos(objectIDs) {
     let objetosHtml = "";
     const promises = []; 
-    const tooltip = document.getElementById("tooltip"); // Obtener el tooltip
 
     for (const objectId of objectIDs) {
         const promise = fetch(`${URL_OBJETOS}/${objectId}`)
@@ -42,6 +62,8 @@ function fetchObjetos(objectIDs) {
                 return response.json();
             })
             .then((data) => {
+                console.log("Primary Image URL:", data.primaryImageSmall);
+
                 const titulo = data.title || "Sin título";
                 const cultura = data.culture ? `Cultura: ${data.culture}` : "Cultura: Desconocida";
                 const dinastia = data.dynasty ? `Dinastía: ${data.dynasty}` : "Dinastía: Desconocida";
@@ -60,11 +82,13 @@ function fetchObjetos(objectIDs) {
                     `<button style="margin-bottom: 10px;" onclick="verImagenesAdicionales(${objectId})">Ver Imágenes Adicionales</button>` 
                     : "";
 
+                // Agregar el evento de hover para el tooltip en cada imagen
                 objetosHtml += `
-                    <div class="objeto" style="position: relative;">
-                        <img src="${imagen}" alt="${titulo}" onerror="this.src='img/noimg.jpg';" 
+                    <div class="objeto">
+                        <img src="${imagen}" alt="${titulo}" title="${fechaCreacion}" 
                             onmouseenter="showTooltip(event, '${fechaCreacion}')" 
-                            onmouseleave="hideTooltip()"/> 
+                            onmouseleave="hideTooltip()"
+                            onerror="this.src='img/noimg.jpg';"/> 
                         <h3 class="titulo">${titulo}</h3>
                         <h5 class="cultura">${cultura}</h5>
                         <h5 class="dinastia">${dinastia}</h5>
@@ -84,29 +108,14 @@ function fetchObjetos(objectIDs) {
     });
 }
 
-// Función para mostrar el tooltip
-function showTooltip(event, fecha) {
-    const tooltip = document.getElementById("tooltip");
-    tooltip.innerHTML = `Fecha: ${fecha}`; // Mostrar la fecha en el tooltip
-    tooltip.style.display = "block"; // Hacer visible el tooltip
 
-    // Posicionar el tooltip centrado sobre la imagen
-    tooltip.style.left = event.pageX + "px"; // Establecer la posición horizontal
-    tooltip.style.top = event.pageY + "px"; // Establecer la posición vertical
-}
-
-// Función para ocultar el tooltip
-function hideTooltip() {
-    const tooltip = document.getElementById("tooltip");
-    tooltip.style.display = "none"; 
-}
 
 fetchDepartamentos();
 
 fetch(URL_SEARCH_IMAGES)
     .then((response) => response.json())
     .then((data) => {
-        fetchObjetos(data.objectIDs.slice(0, 20));
+        fetchObjetos(data.objectIDs.slice(0, 22));
     })
     .catch((error) => {
         console.error("Error al obtener los objetos:", error);
@@ -124,7 +133,7 @@ fetch(URL_SEARCH_IMAGES)
         fetch(URL_SEARCH + `?q=${keyword}&departamentoId=${departamento}&geoLocation=${localizacion}`)
         .then((response) => response.json())
         .then((data) => {
-            fetchObjetos(data.objectIDs.slice(0, 20));
+            fetchObjetos(data.objectIDs.slice(0, 21));
         });
     
     });
