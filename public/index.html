@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museo Metropolitano de Arte</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Museo Metropolitano de Arte</h1>
+
+        <!-- Tooltip para mostrar la fecha -->
+        <div class="tooltip" id="tooltip" style="display:none;"></div>
+
+        <!-- Search Form Section -->
+        <div class="buscador">
+            <form action="" method="post">
+                <div id="input">
+                    <label for="departamento">Departamento</label>
+                    <select name="departamento" id="departamento">
+                        <option value="">Seleccione Departamento</option>
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+                <div id="input">
+                    <label for="keyword">Palabra Clave</label>
+                    <input type="text" id="keyword" name="keyword" placeholder="Ingrese una palabra clave">
+                </div>
+                <div id="input">
+                    <label for="localizacion">Localización</label>
+                    <select name="localizacion" id="localizacion">
+                        <option value="">Seleccione Localización</option>
+                        <option value="China">China</option>
+                        <option value="Paris">París</option>
+                        <option value="Nueva York">Nueva York</option>
+                    </select>
+                </div>
+                <button type="submit" id="buscar">Buscar</button>
+            </form>
+        </div>
+
+        <!-- Art Collection Grid -->
+        <div class="grilla" id="grilla" style="display:none;">
+            <!-- Dynamic objects will be populated here -->
+        </div>
+
+        <!-- Pagination Section -->
+        <div class="paginacion">
+            <!-- Pagination controls will be added here -->
+        </div>
+    </div>
+    <footer>
+        <p>© 2024 Museo Metropolitano de Arte. </p>
+    </footer>
+</body>
+</html>
