@@ -3,32 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Museo Metropolitano de Arte</title>
+    <title>Trabajo Integrador de Constanza Garibotto</title>
+    
+    <!-- Enlaces a estilos y scripts -->
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
     <script src="translate.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <h1>Museo Metropolitano de Arte</h1>
+        <!-- Header con la imagen de fondo -->
+        <header>
+            <h1>Museo Metropolitano de Arte</h1>
+        </header>
 
-        <!-- Tooltip para mostrar la fecha -->
+        <!-- Tooltip para mostrar información adicional -->
         <div class="tooltip" id="tooltip" style="display:none;"></div>
 
-        <!-- Search Form Section -->
+        <!-- Buscador -->
         <div class="buscador">
             <form action="" method="post">
                 <div id="input">
                     <label for="departamento">Departamento</label>
                     <select name="departamento" id="departamento">
                         <option value="">Seleccione Departamento</option>
-                        <!-- Options will be populated dynamically -->
                     </select>
                 </div>
+                
                 <div id="input">
                     <label for="keyword">Palabra Clave</label>
                     <input type="text" id="keyword" name="keyword" placeholder="Ingrese una palabra clave">
                 </div>
+                
                 <div id="input">
                     <label for="localizacion">Localización</label>
                     <select name="localizacion" id="localizacion">
@@ -38,24 +44,22 @@
                         <option value="Nueva York">Nueva York</option>
                     </select>
                 </div>
-                <button type="submit" id="buscar">Buscar</button>
-                <button id="traducir">Traducir</button>
                 
+                <button type="submit" id="buscar">Buscar</button>
             </form>
         </div>
 
-        <!-- Art Collection Grid -->
-        <div class="grilla" id="grilla">
-            <!-- Dynamic objects will be populated here -->
-        </div>
+        <!-- Grilla para mostrar los objetos -->
+        <div class="grilla" id="grilla"></div>
 
-        <!-- Pagination Section -->
-        <div class="paginacion">
-            <!-- Pagination controls will be added here -->
-        </div>
+        <!-- Paginación -->
+        <div class="paginacion" id="paginacion"></div>
     </div>
+
+    <!-- Footer -->
     <footer>
-        <p>© 2024 Museo Metropolitano de Arte. </p>
+        <p>© 2024 Museo Metropolitano de Arte.</p>
+        <p>Trabajo Integrador web II.</p>
     </footer>
 </body>
 </html>
